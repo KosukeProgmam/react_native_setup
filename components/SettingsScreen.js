@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Switch, StyleSheet, Dimensions } from 'react-native';
 import Slider from '@react-native-community/slider';
 
-export default function SettingsScreen() {
+function SettingsScreen() {
   // State to manage the switch for enabling phone vibration
   const [isVibrationEnabled, setIsVibrationEnabled] = useState(false);
 
@@ -16,7 +16,7 @@ export default function SettingsScreen() {
   const [OnYourMark_interval, setOnYourMark_Interval] = useState(3);
 
   // State to manage the SET to GO interval, initalized to 1 seconds
-  const [SET_interval, setSET_Interval] = useState(1);
+  const [GetSet_interval, setGetSet_Interval] = useState(1);
 
   // Function to toggle the phone vibration switch
   const toggleVibrationSwitch = () => setIsVibrationEnabled(previousState => !previousState);
@@ -61,7 +61,7 @@ export default function SettingsScreen() {
       {/* Switch to enable or disable Random Start */}
       <View style={styles.set}>
         <Text>Random Start</Text>
-        <Text style={styles.descriptionText}>Randomly set the interval from SET to pistol from 1 to 10 seconds</Text>
+        <Text style={styles.descriptionText}>Randomly set the time interval from "GET SET" to "GO" within a range of 1 to 10 seconds. </Text>
         <Switch 
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={isRandomEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -72,7 +72,7 @@ export default function SettingsScreen() {
 
       {/* Slider to set the ON YOUR MARK to SET interval */}
       <View style={styles.intervalSetting}>
-        <Text>Interval from ON YOUR MARK to SET: {OnYourMark_interval} sec</Text>
+        <Text>Interval from ON YOUR MARK to GET SET: {OnYourMark_interval} sec</Text>
         <Slider
           style={{ width: screenWidth - 50, height: 40 }} // Adjust the width based on screen width with padding
           minimumValue={3}
@@ -88,14 +88,14 @@ export default function SettingsScreen() {
 
       {/* Slider to set the SET to GO interval */}
       <View style={styles.intervalSetting}>
-        <Text>Interval from ON YOUR MARK to SET: {SET_interval} sec</Text>
+        <Text>Interval from GET SET to GO: {GetSet_interval} sec</Text>
         <Slider
           style={{ width: screenWidth - 50, height: 40 }} // Adjust the width based on screen width with padding
-          minimumValue={3}
+          minimumValue={1}
           maximumValue={10}
           step={1}
-          value={SET_interval}
-          onValueChange={value => setSET_Interval(value)}
+          value={GetSet_interval}
+          onValueChange={value => setGetSet_Interval(value)}
           minimumTrackTintColor="#81b0ff"
           maximumTrackTintColor="#000000"
           thumbTintColor="#f5dd4b"
@@ -130,3 +130,5 @@ const styles = StyleSheet.create({
     
   },
 });
+
+export default SettingsScreen;
