@@ -1,29 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, Switch, StyleSheet, Dimensions } from 'react-native';
 import Slider from '@react-native-community/slider';
+import { SettingsContext } from '../contexts/SettingsData';
 
-function SettingsScreen() {
+const SettingsScreen = () => {
   // State to manage the switch for enabling phone vibration
-  const [isVibrationEnabled, setIsVibrationEnabled] = useState(false);
-
-  // State to manage the switch for enabling feedback audio
-  const [isAudioEnabled, setIsAudioEnabled] = useState(false);
-
-  // State to manage the switch for enabling Random Start
-  const [isRandomEnabled, setIsRandomEnabled] = useState(true);
-
-  // State to manage the ON YOUR MARK to SET interval, initialized to 3 seconds
-  const [OnYourMark_interval, setOnYourMark_Interval] = useState(3);
-
-  // State to manage the SET to GO interval, initalized to 1 seconds
-  const [GetSet_interval, setGetSet_Interval] = useState(1);
+  const { 
+    OnYourMark_interval, setOnYourMark_Interval, 
+    GetSet_interval, setGetSet_Interval,
+    isVibrationEnabled, setIsVibrationEnabled,
+    isAudioEnabled, setIsAudioEnabled,
+    isRandomEnabled, setIsRandomEnabled
+  } = useContext(SettingsContext);
 
   // Function to toggle the phone vibration switch
   const toggleVibrationSwitch = () => setIsVibrationEnabled(previousState => !previousState);
 
   // Function to toggle the feedback audio switch
   const toggleAudioSwitch = () => setIsAudioEnabled(previousState => !previousState);
-
+  console.log('Is audio enabled', isAudioEnabled);
   // Function to toggle the random start switch
   const toggleRandomSwitch = () => setIsRandomEnabled(previousState => !previousState);
 
@@ -32,6 +27,7 @@ function SettingsScreen() {
 
   return (
     <View style={styles.container}>
+      {/* Title for the System settings */}
       <Text style={styles.title}>System</Text>
       
       {/* Switch to enable or disable Phone Vibration */}
@@ -56,6 +52,7 @@ function SettingsScreen() {
         />
       </View>
       
+      {/* Title for the Timer settings */}
       <Text style={styles.title}>Timer settings</Text>
 
       {/* Switch to enable or disable Random Start */}
@@ -127,7 +124,6 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: '#808080',
-    
   },
 });
 
